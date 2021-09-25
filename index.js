@@ -9,7 +9,7 @@ const puppeteer = require("puppeteer");
     waitUntil: "load",
     timeout: 0,
   });
-  await page.waitForSelector(".schema-product__group");
+  await page.waitForSelector(".schema-pagination__main");
   let elems = await page.$$eval(".schema-product__group", (element) =>
     element.map((el) => {
       let price = Number.parseInt(
@@ -26,6 +26,7 @@ const puppeteer = require("puppeteer");
     a.vendor = b[1];
     a.name = b.slice(2, b.length).join(" ");
   });
+  elems = elems.filter((a) => a.vendor == "Xiaomi");
   console.log(elems);
   await browser.close();
 })();
